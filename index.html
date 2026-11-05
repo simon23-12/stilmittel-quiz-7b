@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stilmittel-Quiz 7b</title>
+<meta name="description" content="Vergleich, Personifikation oder Metapher? 15 Fragen für die Klasse 7b.">
+<style>
+  :root {
+    --bg: #fbf6ee;
+    --card: #ffffff;
+    --ink: #2b2a33;
+    --muted: #6b6878;
+    --line: #e7dfd0;
+    --vergleich: #2f7fd1;
+    --vergleich-bg: #e3f0fc;
+    --person: #d9531e;
+    --person-bg: #fdeadf;
+    --metapher: #7b45c4;
+    --metapher-bg: #efe6fb;
+    --good: #23864a;
+    --good-bg: #dff3e6;
+    --bad: #c0392b;
+    --bad-bg: #fbe3e0;
+    --shadow: 0 2px 0 rgba(43,42,51,.08), 0 10px 30px rgba(43,42,51,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1a22;
+      --card: #26242f;
+      --ink: #f2eee6;
+      --muted: #a9a5b6;
+      --line: #3a3746;
+      --vergleich: #6db3f5;
+      --vergleich-bg: #1f3347;
+      --person: #ff9366;
+      --person-bg: #4a2d20;
+      --metapher: #b894f0;
+      --metapher-bg: #34284c;
+      --good: #5fd18a;
+      --good-bg: #1f3a2a;
+      --bad: #ff8a7a;
+      --bad-bg: #4a2523;
+      --shadow: 0 2px 0 rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  main { max-width: 680px; margin: 0 auto; padding: 24px 16px 56px; }
+  h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); line-height: 1.1; margin: 0 0 6px; letter-spacing: -.01em; }
+  h2 { font-size: 1.25rem; margin: 0 0 8px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+  .card {
+    background: var(--card);
+    border: 2px solid var(--line);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+  }
+  .hidden { display: none !important; }
+
+  /* Start */
+  .badge { display: inline-block; background: var(--ink); color: var(--bg); font-weight: 700; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; margin-bottom: 12px; }
+  .types { display: grid; gap: 12px; margin: 20px 0 24px; }
+  .type { border-radius: 14px; padding: 12px 14px; border-left: 8px solid; }
+  .type b { display: block; font-size: 1.05rem; }
+  .type span { font-size: .95rem; }
+  .type em { font-style: normal; font-weight: 700; }
+  .t-vergleich { background: var(--vergleich-bg); border-color: var(--vergleich); }
+  .t-person { background: var(--person-bg); border-color: var(--person); }
+  .t-metapher { background: var(--metapher-bg); border-color: var(--metapher); }
+
+  button { font: inherit; cursor: pointer; }
+  .btn-main {
+    background: var(--ink); color: var(--bg);
+    border: 0; border-radius: 14px; padding: 14px 26px; font-weight: 700; font-size: 1.05rem;
+    box-shadow: 0 4px 0 rgba(0,0,0,.25);
+    transition: transform .08s, box-shadow .08s;
+  }
+  .btn-main:hover { transform: translateY(-1px); }
+  .btn-main:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,.25); }
+  button:focus-visible { outline: 3px solid var(--vergleich); outline-offset: 3px; }
+
+  /* Quiz */
+  .topbar { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; margin-bottom: 8px; }
+  .progress { height: 12px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 18px; }
+  .progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--vergleich), var(--metapher), var(--person)); transition: width .35s ease; }
+  .question-label { font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+  .sentence {
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    line-height: 1.3;
+    margin: 0 0 22px;
+    padding: 4px 0 4px 16px;
+    border-left: 5px solid var(--line);
+  }
+  mark { background: none; color: inherit; border-bottom: 4px solid; padding: 0 1px; }
+  .sentence mark { border-color: var(--ink); }
+
+  .choices { display: grid; gap: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 12px;
+    text-align: left;
+    border: 2px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform .08s, border-color .15s, background .15s;
+  }
+  .choice:not(:disabled):hover { transform: translateX(3px); }
+  .choice .key { flex: none; width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; font-size: .9rem; color: #fff; }
+  .choice[data-k="vergleich"] .key { background: var(--vergleich); }
+  .choice[data-k="personifikation"] .key { background: var(--person); }
+  .choice[data-k="metapher"] .key { background: var(--metapher); }
+  .choice[data-k="vergleich"]:not(:disabled):hover { border-color: var(--vergleich); }
+  .choice[data-k="personifikation"]:not(:disabled):hover { border-color: var(--person); }
+  .choice[data-k="metapher"]:not(:disabled):hover { border-color: var(--metapher); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--good-bg); border-color: var(--good); }
+  .choice.wrong { background: var(--bad-bg); border-color: var(--bad); }
+  .choice:disabled:not(.correct):not(.wrong) { opacity: .5; }
+
+  .feedback { margin-top: 18px; border-radius: 14px; padding: 14px 16px; animation: pop .25s ease; }
+  .feedback.ok { background: var(--good-bg); border: 2px solid var(--good); }
+  .feedback.no { background: var(--bad-bg); border: 2px solid var(--bad); }
+  .feedback h3 { margin: 0 0 4px; font-size: 1.1rem; }
+  .feedback p { margin: 0; font-size: 1rem; }
+  .feedback mark { border-color: currentColor; font-weight: 700; }
+  .next-row { margin-top: 16px; text-align: right; }
+  @keyframes pop { from { transform: scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  /* Ergebnis */
+  .score { text-align: center; }
+  .score .big { font-size: clamp(3.5rem, 16vw, 5.5rem); font-weight: 800; line-height: 1; margin: 6px 0; }
+  .score .big small { font-size: .4em; color: var(--muted); font-weight: 600; }
+  .stars { font-size: 2rem; letter-spacing: 6px; margin-bottom: 4px; }
+  .review { margin: 24px 0 8px; display: grid; gap: 10px; }
+  .review-item { border: 2px solid var(--line); border-radius: 12px; padding: 10px 14px; background: var(--card); }
+  .review-item .s { font-family: Georgia, serif; font-size: 1.1rem; }
+  .review-item .a { font-size: .95rem; color: var(--muted); }
+  .review-item .a b { color: var(--ink); }
+  .center { text-align: center; }
+  footer { margin-top: 28px; text-align: center; font-size: .85rem; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- START -->
+  <section id="start">
+    <span class="badge">Deutsch · Klasse 7b</span>
+    <h1>Stilmittel-Quiz</h1>
+    <p class="muted">Vergleich, Personifikation oder Metapher? 15 Sätze – du entscheidest.</p>
+
+    <div class="card">
+      <h2>Zur Erinnerung</h2>
+      <div class="types">
+        <div class="type t-vergleich">
+          <b>Vergleich</b>
+          <span>Zwei Dinge werden mit einem Vergleichswort verbunden: <em>wie</em>, <em>als ob</em>, <em>als wäre</em>.<br>„Er ist stark <u>wie</u> ein Bär.“</span>
+        </div>
+        <div class="type t-person">
+          <b>Personifikation</b>
+          <span>Dinge, Tiere oder Natur tun etwas, was nur Menschen können (sprechen, lachen, schlafen …).<br>„Die Sonne lacht.“</span>
+        </div>
+        <div class="type t-metapher">
+          <b>Metapher</b>
+          <span>Ein Bild <em>ohne</em> „wie“: Etwas wird einfach gleichgesetzt oder umschrieben.<br>„Er ist ein Bär.“</span>
+        </div>
+      </div>
+      <button class="btn-main" id="startBtn">Quiz starten</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden" aria-live="polite">
+    <div class="topbar">
+      <span id="qCount">Frage 1 / 15</span>
+      <span id="qScore">0 Punkte</span>
+    </div>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0" id="bar"><i></i></div>
+
+    <div class="card">
+      <div class="question-label">Welches Stilmittel ist das?</div>
+      <p class="sentence" id="sentence"></p>
+
+      <div class="choices" id="choices">
+        <button class="choice" data-k="vergleich"><span class="key">1</span>Vergleich</button>
+        <button class="choice" data-k="personifikation"><span class="key">2</span>Personifikation</button>
+        <button class="choice" data-k="metapher"><span class="key">3</span>Metapher</button>
+      </div>
+
+      <div id="feedback" class="feedback hidden" role="status"></div>
+      <div class="next-row hidden" id="nextRow">
+        <button class="btn-main" id="nextBtn">Weiter →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERGEBNIS -->
+  <section id="result" class="hidden">
+    <div class="card score">
+      <div class="stars" id="stars"></div>
+      <div class="big"><span id="finalScore">0</span><small> / 15</small></div>
+      <h2 id="verdict"></h2>
+      <p class="muted" id="verdictSub"></p>
+      <button class="btn-main" id="againBtn">Nochmal spielen</button>
+    </div>
+    <div id="reviewWrap" class="hidden">
+      <h2 style="margin-top:28px">Das kannst du nochmal üben:</h2>
+      <div class="review" id="review"></div>
+    </div>
+  </section>
+
+  <footer>Stilmittel-Quiz · Klasse 7b</footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var NAMES = { vergleich: "Vergleich", personifikation: "Personifikation", metapher: "Metapher" };
+
+  // text: Satz, hl: markierter Teil (muss im Satz vorkommen), why: Erklärung
+  var QUESTIONS = [
+    { text: "Er ist stark wie ein Bär.", hl: "wie", a: "vergleich",
+      why: "Das Wort „wie“ verbindet zwei Dinge miteinander – das ist das Erkennungszeichen eines Vergleichs." },
+    { text: "Die Sonne lacht vom Himmel.", hl: "lacht", a: "personifikation",
+      why: "Lachen können nur Menschen. Hier „lacht“ die Sonne – ein Gegenstand der Natur verhält sich wie eine Person." },
+    { text: "Sie ist ein Sonnenschein.", hl: "ein Sonnenschein", a: "metapher",
+      why: "Kein „wie“! Das Mädchen wird direkt mit „Sonnenschein“ gleichgesetzt – gemeint ist: Sie ist fröhlich und bringt gute Laune mit." },
+    { text: "Sie tanzte so leicht wie eine Feder.", hl: "wie", a: "vergleich",
+      why: "„so leicht wie“ – hier steht ein Vergleichswort, also ein Vergleich." },
+    { text: "Der Wind flüstert durch die Bäume.", hl: "flüstert", a: "personifikation",
+      why: "Flüstern können nur Menschen. Der Wind bekommt eine menschliche Eigenschaft." },
+    { text: "Sein Herz ist aus Stein.", hl: "aus Stein", a: "metapher",
+      why: "Ein Herz ist natürlich nicht wirklich aus Stein. Das Bild bedeutet: Er ist kalt und gefühllos. Es gibt kein „wie“, also eine Metapher." },
+    { text: "Seine Worte trafen mich wie Messerstiche.", hl: "wie", a: "vergleich",
+      why: "Worte und Messerstiche werden mit „wie“ verglichen. Das ist ein Vergleich." },
+    { text: "Der Mond schaut neugierig durchs Fenster.", hl: "schaut neugierig", a: "personifikation",
+      why: "Neugierig schauen können nur Lebewesen. Der Mond wird wie ein Mensch dargestellt." },
+    { text: "Das Leben ist eine Achterbahn.", hl: "eine Achterbahn", a: "metapher",
+      why: "Das Leben wird direkt mit einer Achterbahn gleichgesetzt (es geht rauf und runter). Ohne „wie“ ist das eine Metapher." },
+    { text: "Er rannte, als wäre der Teufel hinter ihm her.", hl: "als wäre", a: "vergleich",
+      why: "Auch „als wäre“ und „als ob“ sind Vergleichswörter – nicht nur „wie“." },
+    { text: "Die Stadt schläft noch.", hl: "schläft", a: "personifikation",
+      why: "Eine Stadt kann nicht schlafen. Das tun nur Menschen und Tiere. Gemeint ist: Es ist noch ruhig und niemand ist unterwegs." },
+    { text: "Mein Zimmer ist ein Schlachtfeld.", hl: "ein Schlachtfeld", a: "metapher",
+      why: "Das Zimmer wird mit einem Schlachtfeld gleichgesetzt, weil es so chaotisch aussieht. Kein „wie“ – deshalb Metapher." },
+    { text: "Der Boden war glatt wie Eis.", hl: "wie", a: "vergleich",
+      why: "„glatt wie Eis“ – der Boden wird mit Eis verglichen. Das „wie“ verrät den Vergleich." },
+    { text: "Der Herbst malt die Blätter bunt.", hl: "malt", a: "personifikation",
+      why: "Malen ist eine menschliche Tätigkeit. Der Herbst wird wie ein Künstler dargestellt." },
+    { text: "Mein Bruder ist eine Schlafmütze.", hl: "eine Schlafmütze", a: "metapher",
+      why: "Dein Bruder trägt keine Mütze zum Schlafen, er ist gemeint als jemand, der viel schläft oder langsam ist. Gleichsetzung ohne „wie“ = Metapher." }
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var start = $("start"), quiz = $("quiz"), result = $("result");
+  var order, idx, score, answered, wrongList;
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function esc(s) {
+    return s.replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function highlight(text, hl) {
+    var i = text.indexOf(hl);
+    if (i < 0) return esc(text);
+    return esc(text.slice(0, i)) + "<mark>" + esc(hl) + "</mark>" + esc(text.slice(i + hl.length));
+  }
+
+  function show(sec) {
+    [start, quiz, result].forEach(function (s) { s.classList.add("hidden"); });
+    sec.classList.remove("hidden");
+    window.scrollTo(0, 0);
+  }
+
+  function begin() {
+    order = shuffle(QUESTIONS);
+    idx = 0; score = 0; wrongList = [];
+    show(quiz);
+    render();
+  }
+
+  function render() {
+    var q = order[idx];
+    answered = false;
+    $("qCount").textContent = "Frage " + (idx + 1) + " / " + order.length;
+    $("qScore").textContent = score + (score === 1 ? " Punkt" : " Punkte");
+    $("bar").setAttribute("aria-valuenow", idx);
+    $("bar").firstElementChild.style.width = (idx / order.length * 100) + "%";
+    $("sentence").textContent = "„" + q.text + "“";
+    var btns = $("choices").querySelectorAll(".choice");
+    btns.forEach(function (b) { b.disabled = false; b.className = "choice"; });
+    $("feedback").classList.add("hidden");
+    $("nextRow").classList.add("hidden");
+    $("nextBtn").textContent = idx === order.length - 1 ? "Ergebnis ansehen →" : "Weiter →";
+  }
+
+  function answer(key) {
+    if (answered) return;
+    answered = true;
+    var q = order[idx];
+    var ok = key === q.a;
+    if (ok) score++; else wrongList.push({ q: q, given: key });
+
+    $("choices").querySelectorAll(".choice").forEach(function (b) {
+      b.disabled = true;
+      if (b.dataset.k === q.a) b.classList.add("correct");
+      else if (b.dataset.k === key) b.classList.add("wrong");
+    });
+
+    $("sentence").innerHTML = "„" + highlight(q.text, q.hl) + "“";
+    var fb = $("feedback");
+    fb.className = "feedback " + (ok ? "ok" : "no");
+    fb.innerHTML = "<h3>" + (ok ? "Richtig! ✓" : "Leider falsch ✗ – es ist " + (q.a === "personifikation" ? "eine " : q.a === "metapher" ? "eine " : "ein ") + NAMES[q.a]) + "</h3><p>" + esc(q.why) + "</p>";
+    $("qScore").textContent = score + (score === 1 ? " Punkt" : " Punkte");
+    $("bar").firstElementChild.style.width = ((idx + 1) / order.length * 100) + "%";
+    $("nextRow").classList.remove("hidden");
+    $("nextBtn").focus();
+  }
+
+  function next() {
+    if (!answered) return;
+    idx++;
+    if (idx >= order.length) finish(); else render();
+  }
+
+  function finish() {
+    var n = order.length;
+    $("finalScore").textContent = score;
+    var pct = score / n;
+    var stars = pct >= 0.9 ? 3 : pct >= 0.7 ? 2 : pct >= 0.4 ? 1 : 0;
+    $("stars").textContent = "★".repeat(stars) + "☆".repeat(3 - stars);
+    var v, sub;
+    if (score === n) { v = "Perfekt! Stilmittel-Profi!"; sub = "Kein einziger Fehler – stark."; }
+    else if (pct >= 0.8) { v = "Sehr gut!"; sub = "Du erkennst die Stilmittel sicher."; }
+    else if (pct >= 0.6) { v = "Gut gemacht!"; sub = "Ein paar Dinge kannst du noch festigen."; }
+    else if (pct >= 0.4) { v = "Auf dem richtigen Weg"; sub = "Schau dir die Erklärungen unten nochmal an."; }
+    else { v = "Noch etwas Übung nötig"; sub = "Tipp: Suche zuerst nach „wie“ oder „als ob“ – dann weißt du, ob es ein Vergleich ist."; }
+    $("verdict").textContent = v;
+    $("verdictSub").textContent = sub;
+
+    var wrap = $("reviewWrap"), rv = $("review");
+    rv.innerHTML = "";
+    if (wrongList.length) {
+      wrongList.forEach(function (w) {
+        var d = document.createElement("div");
+        d.className = "review-item";
+        d.innerHTML = '<div class="s">„' + highlight(w.q.text, w.q.hl) + '“</div>' +
+          '<div class="a">Du hast <b>' + NAMES[w.given] + '</b> gewählt – richtig ist <b>' + NAMES[w.q.a] + '</b>. ' + esc(w.q.why) + '</div>';
+        rv.appendChild(d);
+      });
+      wrap.classList.remove("hidden");
+    } else {
+      wrap.classList.add("hidden");
+    }
+    show(result);
+  }
+
+  $("startBtn").addEventListener("click", begin);
+  $("againBtn").addEventListener("click", begin);
+  $("nextBtn").addEventListener("click", next);
+  $("choices").addEventListener("click", function (e) {
+    var b = e.target.closest(".choice");
+    if (b) answer(b.dataset.k);
+  });
+
+  // Tastatur: 1/2/3 zum Antworten, Enter/Leertaste für Weiter
+  var KEYS = { "1": "vergleich", "2": "personifikation", "3": "metapher" };
+  document.addEventListener("keydown", function (e) {
+    if (quiz.classList.contains("hidden")) return;
+    if (!answered && KEYS[e.key]) { answer(KEYS[e.key]); }
+  });
+})();
+</script>
+</body>
+</html>
